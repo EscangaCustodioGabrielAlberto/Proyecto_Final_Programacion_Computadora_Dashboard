@@ -94,3 +94,33 @@
     font-size: 1.6rem;
     flex-direction: row;
 }
+
+.task-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.delete-btn {
+    background-color: var(--primary-dark);
+    color:white;
+}
+
+.delete-btn:hover {
+    background-color: rgb(140, 90, 239);
+}
+
+.completed span {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-stats {
+    display: flex;
+    justify-content: space-between;
+    background: rgb(237, 216, 249);
+    padding: 12px;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    gap: 60px;
+}

@@ -17,17 +17,21 @@
             <button id="addTaskBtn">Agregar</button>
         </section>
 
+        <section class="task-stats">
+            <p>Total: <span id="totalTask"> 0 </span></p>
+            <p>Completadas: <span id="completedTask"> 0 </span></p>
+            <p>Pendientes: <span id="pendingTask"> 0 </span></p>
+        </section>
+
         <section id="taskList" class="task-list">
             <div class="task-item">
-                <span>Estudiar CSS </span>
-                <input type="checkbox" id="checkBtn" class="complete-btn">
+                <div class="task-left">
+                    <input type="checkbox">
+                    <span>Estudiar JavaScript</span>
+                </div>
+                <button class="delete-btn">Eliminar</button>
             </div>
 
-            <div class="task-item">
-                <span>Hacer ejercicio </span>
-                <input type="checkbox" id="checkBtn" class="complete-btn">
-                
-            </div>
         </section>
     </main>
     <script src="js/script.js"></script>
