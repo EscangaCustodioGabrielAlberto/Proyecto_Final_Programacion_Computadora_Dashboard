@@ -1,0 +1,96 @@
+:root {
+    --primary: rgb(220, 203, 253);
+    --secondary: rgb(253, 253, 181);
+    --primary-dark: rgb(182, 146, 255);
+    --secondary-dark: rgb(255, 255, 102);
+}
+
+.header {
+    text-align: center;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    height: 13vh;
+    padding-top: 7px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+.task-form {
+    text-align: center;
+    margin-top: 35px;
+}
+
+.task-form input {
+    width: 420px;
+    height: 30px;
+    border-radius: 7px;
+}
+
+.task-form button {
+    background-color: var(--secondary);
+    border:2px solid var(--secondary-dark);
+    color: black;
+    padding: 2px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+    height: 33px;
+    transition: all 0.3s ease;
+}
+
+.task-form button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2)
+}
+
+.task-list {
+    text-align: end;
+    margin-top: 20px;
+    background-color: var(--primary);
+    border:2px solid var(--primary-dark);
+    width: 700px;
+    align-items: center;
+    border-radius: 10px;
+    justify-content: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.complete-btn {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border: 2px solid var(--secondary-dark);
+}
+
+.complete-btn:checked {
+    background-color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.complete-btn:checked::after {
+    content: "✓";
+    color:black;
+    font-size: 14px;
+}
+
+.task-item {
+    display:flex;
+    width: 670px;
+    border:2px solid var(--secondary);
+    border-radius: 8px;
+    background-color: white;
+    margin: 13px;
+    font-size: 1.6rem;
+    flex-direction: row;
+}
