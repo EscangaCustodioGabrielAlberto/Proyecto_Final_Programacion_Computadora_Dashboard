@@ -104,6 +104,7 @@
 .delete-btn {
     background-color: var(--primary-dark);
     color:white;
+    margin-left: auto;
 }
 
 .delete-btn:hover {
@@ -123,4 +124,10 @@
     border-radius: 7px;
     margin-bottom: 20px;
     gap: 60px;
+}
+
+.task-sort {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }

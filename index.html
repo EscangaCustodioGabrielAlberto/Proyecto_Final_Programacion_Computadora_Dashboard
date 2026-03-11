@@ -1,39 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
     <header class="header">
         <h1>Dashboard de Tareas</h1>
     </header>
-
     <main class="container">
+
         <section class="task-form">
-            <input id="taskInput" type="text" placeholder="Nueva Tarea">
+            <input id="taskInput" type="text" placeholder="Nueva tarea">
             <button id="addTaskBtn">Agregar</button>
+            <button id="completeAllBtn">Completar Todas Las Tareas</button>
         </section>
 
-        <section class="task-stats">
-            <p>Total: <span id="totalTask"> 0 </span></p>
-            <p>Completadas: <span id="completedTask"> 0 </span></p>
-            <p>Pendientes: <span id="pendingTask"> 0 </span></p>
-        </section>
+        <!-- El Contador de tareas-->
+         <section class="task-stats">
+            <p>Total: <span id="totalTasks"> 0 </span></p>
+            <p>Completadas: <span id="completedTasks"> 0 </span> </p>
+            <p>Pendientes: <span id="pendingTasks"> 0 </span></p>
+         </section>
+
+         <section class="task-sort">
+            <button id="sortAZ">Ordenar de A -> Z</button>
+            <button id="sortZA">Ordenar de Z -> A</button>
+         </section>
 
         <section id="taskList" class="task-list">
-            <div class="task-item">
+            <!--<div class="task-item">
                 <div class="task-left">
                     <input type="checkbox">
-                    <span>Estudiar JavaScript</span>
+                    <span>Estudiar Javascript</span>
                 </div>
                 <button class="delete-btn">Eliminar</button>
-            </div>
-
+            </div>-->
         </section>
+
     </main>
+    <!-- NUEVO EN ESTA CLASE -->
+    <!-- Conexión con el archivo JavaScript -->
     <script src="js/script.js"></script>
 
 </body>
