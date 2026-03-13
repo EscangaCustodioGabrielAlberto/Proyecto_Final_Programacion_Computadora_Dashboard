@@ -20,6 +20,7 @@ const taskList = document.getElementById("taskList");
 const totalTasks = document.getElementById("totalTasks");
 const completedTasks = document.getElementById("completedTasks");
 const pendingTasks = document.getElementById("pendingTasks");
+const progressTasks = document.getElementById("progress");
 
 //Boton para completar todas las tareas
 const completeAllBtn = document.getElementById("completeAllBtn");
@@ -85,9 +86,20 @@ function updateStats() {
    const tasks = document.querySelectorAll(".task-item");
    const completed = document.querySelectorAll(".task-item.completed");
 
-   totalTasks.textContent = tasks.length;
-   completedTasks.textContent = completed.length;
-   pendingTasks.textContent = tasks.length - completed.length;
+   const total = tasks.length;
+   const done = completed.length;
+
+   totalTasks.textContent = total;
+   completedTasks.textContent = done;
+   pendingTasks.textContent = total - done;
+
+    let porcentaje = 0
+    if(total > 0) {
+        const resultado = (done / total) * 100;
+        porcentaje = Math.round(resultado);
+    }
+
+   progressTasks.textContent = porcentaje + "%"
 }
 
 function createTask() {
@@ -97,8 +109,8 @@ function createTask() {
 
     if (taskText === "" ) return;
 
-    if (taskText.length < 4) {
-        alert("La tarea debe tener al menos 4 caracteres. Intente de nuevo.");
+    if (taskText.length < 5) {
+        alert("La tarea debe tener al menos 5 caracteres. Intente de nuevo.");
         return;
     }
 
@@ -141,6 +153,17 @@ function createTask() {
 
     checkbox.addEventListener("change", function() {
       taskItem.classList.toggle("completed")
+
+      if(checkbox.checked) {
+        taskItem.classList.remove("task-item");
+        taskItem.classList.add("task-item-checked");
+        taskList.appendChild(taskItem);
+      } else {
+        taskItem.classList.remove("task-item-checked");
+        taskItem.classList.add("task-item");
+        taskList.prepend(taskItem);
+      }
+
       updateStats();
     })
 

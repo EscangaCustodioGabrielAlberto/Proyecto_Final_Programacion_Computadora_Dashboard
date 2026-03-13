@@ -95,16 +95,55 @@
     flex-direction: row;
 }
 
+.task-item-checked {
+    display:flex;
+    width: 670px;
+    border:2px solid var(--secondary);
+    border-radius: 8px;
+    background-color: var(--primary-dark);
+    margin: 13px;
+    font-size: 1.6rem;
+    flex-direction: row;
+}
+
+.task-item:hover .delete-btn{
+    display:block;
+}
+
+.task-item-checked:hover .delete-btn {
+    display:block;
+}
+
 .task-left {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
+.task-sort button {
+    background-color: var(--secondary);
+    border:2px solid var(--secondary-dark);
+    color: black;
+    padding: 2px;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+    height: 33px;
+    transition: all 0.3s ease;
+}
+
+.task-sort button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2)
+}
+
 .delete-btn {
     background-color: var(--primary-dark);
     color:white;
     margin-left: auto;
+    display: none;
+    border-radius: 10px;
 }
 
 .delete-btn:hover {
