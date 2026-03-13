@@ -29,42 +29,52 @@ const completeAllBtn = document.getElementById("completeAllBtn");
 const sortAZ = document.getElementById("sortAZ");
 const sortZA = document.getElementById("sortZA");
 
+//Modelo de datos
+let tasks = [];
+
+//Guardar en el Local Storage
+function saveTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    const saved = localStorage.getItem("Tasks");
+
+    if(saved) {
+        tasks = JSON.parse(saved);
+    }
+}
+
 /* ===============================
    2. ESCUCHAR EVENTO DEL BOTÓN
    =============================== */
 //Boton de A->Z
 sortAZ.addEventListener("click", function(){
-    const tasks = Array.from( document.querySelectorAll(".task-item"));
 
     tasks.sort(function(a,b) {
-        const textA = a.querySelector("span").textContent.toLowerCase();
-        const textB = b.querySelector("span").textContent.toLowerCase();
+        const textA = a.text;
+        const textB = b.text;
 
         return textA.localeCompare(textB);
     });
 
-    taskList.innerHTML = "";
-
-    tasks.forEach(function(task) {
-        taskList.appendChild(task);
-    });
+    saveTasks();
+    renderTasks();
 })
 
 sortZA.addEventListener("click", function(){
-    const tasks = Array.from( document.querySelectorAll(".task-item"));
+    
 
     tasks.sort(function(primerPalabra,segundaPalabra) {
-        const textA = primerPalabra.querySelector("span").textContent.toLowerCase();
-        const textB = segundaPalabra.querySelector("span").textContent.toLowerCase();
+        const textA = primerPalabra.text;
+        const textB = segundaPalabra.text;
 
         return textB.localeCompare(textA);
     });
 
-    taskList.innerHTML = "";
+    saveTasks();
+    renderTasks();
 
-    tasks.forEach(function(task) {
-        taskList.appendChild(task);
-    });
 })
 
 /*
@@ -102,17 +112,11 @@ function updateStats() {
    progressTasks.textContent = porcentaje + "%"
 }
 
-function createTask() {
-   //Guardamos el texto que escribio el usuario
-    const taskText = input.value;
-    console.log(taskText);
+function renderTasks() {
 
-    if (taskText === "" ) return;
+    taskList.innerHTML = "";
 
-    if (taskText.length < 5) {
-        alert("La tarea debe tener al menos 5 caracteres. Intente de nuevo.");
-        return;
-    }
+    tasks.forEach( function(task, index) {
 
     const fecha = document.createElement("small"); 
     fecha.textContent = ` (${new Date().toLocaleDateString()})`; 
@@ -121,25 +125,31 @@ function createTask() {
     fecha.style.marginLeft = "8px";
 
     //Crear elemento de tarea
+
     const taskItem = document.createElement("div");
     taskItem.classList.add("task-item");
+
+    
 
     const taskLeft = document.createElement("div");
     taskLeft.classList.add("task-left");
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    checkbox.checked = task.completed;
 
     const span = document.createElement("span");
-    span.textContent = taskText;
+    span.textContent = task.text;
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Eliminar";
     deleteButton.classList.add("delete-btn");
 
     deleteButton.addEventListener("click", function() {
-      taskItem.remove();
-      updateStats();
+      tasks.splice(index, 1);
+
+      saveTasks();
+      renderTasks();
     });
     
     deleteButton.addEventListener("click", function() {
@@ -153,18 +163,10 @@ function createTask() {
 
     checkbox.addEventListener("change", function() {
       taskItem.classList.toggle("completed")
+      tasks[index].completed = checkbox.checked;
 
-      if(checkbox.checked) {
-        taskItem.classList.remove("task-item");
-        taskItem.classList.add("task-item-checked");
-        taskList.appendChild(taskItem);
-      } else {
-        taskItem.classList.remove("task-item-checked");
-        taskItem.classList.add("task-item");
-        taskList.prepend(taskItem);
-      }
-
-      updateStats();
+      saveTasks();
+      renderTasks();
     })
 
     //Estructura HTML de cada tarea
@@ -180,11 +182,36 @@ function createTask() {
 
     //Agregar la tarea al Dashboard
     taskList.appendChild(taskItem)
+    });
+
+    updateStats();
+
+}
+
+function createTask() {
+   //Guardamos el texto que escribio el usuario
+    const taskText = input.value;
+    console.log(taskText);
+
+    if (taskText === "" ) return;
+
+    if (taskText.length < 5) {
+        alert("La tarea debe tener al menos 5 caracteres. Intente de nuevo.");
+        return;
+    }
+
+    const newTask = {
+        text: taskText,
+        completed: false
+    }
+
+    tasks.push(newTask);
 
     //Limpiar input
     input.value = "";
 
-    updateStats();
+    saveTasks();
+    renderTasks();
 }
 
 completeAllBtn.addEventListener("click", function() {
@@ -198,5 +225,13 @@ completeAllBtn.addEventListener("click", function() {
         }
     });
 
-    updateStats();
+    saveTasks();
+    renderTasks();
 });
+
+
+
+
+//Inicializacion
+loadTasks();
+renderTasks();
