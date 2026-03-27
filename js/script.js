@@ -93,23 +93,24 @@ input.addEventListener("keypress", function(tecla) {
 });
 
 function updateStats() {
-   const tasks = document.querySelectorAll(".task-item");
-   const completed = document.querySelectorAll(".task-item.completed");
+   const stats = getStats();
 
-   const total = tasks.length;
-   const done = completed.length;
+   totalTasks.textContent = stats.total;
+   completedTasks.textContent = stats.done;
+   pendingTasks.textContent = stats.pending;
+   progressTasks.textContent = stats.percentage + "%";
+}
 
-   totalTasks.textContent = total;
-   completedTasks.textContent = done;
-   pendingTasks.textContent = total - done;
+function getStats() {
+    const total = tasks.length;
+    const done = tasks.filter(tarea => tarea.completed).length;
 
-    let porcentaje = 0
-    if(total > 0) {
-        const resultado = (done / total) * 100;
-        porcentaje = Math.round(resultado);
+    return{
+        total,
+        done,
+        pending: total - done,
+        percentage: total > 0 ? Math.round((done / total) * 100) : 0
     }
-
-   progressTasks.textContent = porcentaje + "%"
 }
 
 function renderTasks() {
@@ -160,17 +161,12 @@ function renderTasks() {
     const confirmar = confirm("¿Estas seguro de querer eliminar esta tarea?");
 
     if (confirmar) {
-        taskItem.remove();
-        updateStats();
+        deleteTask(index);
     }
     });
 
     checkbox.addEventListener("change", function() {
-      taskItem.classList.toggle("completed")
-      tasks[index].completed = checkbox.checked;
-
-      saveTasks();
-      renderTasks();
+      toggleTask(index);
     })
 
     //Estructura HTML de cada tarea
@@ -192,10 +188,21 @@ function renderTasks() {
 
 }
 
-function createTask() {
-   //Guardamos el texto que escribio el usuario
-    const taskText = input.value;
-    console.log(taskText);
+function toggleTask(index) {
+    tasks[index].completed = !tasks[index].completed;
+
+    saveTasks();
+    renderTasks();
+}
+
+function deleteTask(index) {
+    tasks.splice(index, 1);
+    saveTasks();
+    renderTasks();
+}
+
+function addTask(taskText) {
+    //Guardamos el texto que escribio el usuario
 
     if (taskText === "" ) return;
 
@@ -211,11 +218,13 @@ function createTask() {
 
     tasks.push(newTask);
 
-    //Limpiar input
-    input.value = "";
-
     saveTasks();
     renderTasks();
+}
+
+function createTask() {
+   addTask(input.value);
+   input.value = "";
 }
 
 completeAllBtn.addEventListener("click", function() {
