@@ -98,11 +98,12 @@
 .task-item-checked {
     display:flex;
     width: 670px;
-    border:2px solid var(--secondary);
+    border:2px solid var(--primary-dark);
     border-radius: 8px;
     background-color: var(--primary-dark);
     margin: 13px;
     font-size: 1.6rem;
+    text-decoration: line-through;
     flex-direction: row;
 }
 

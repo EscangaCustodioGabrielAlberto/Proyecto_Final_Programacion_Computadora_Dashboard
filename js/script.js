@@ -38,7 +38,7 @@ function saveTasks() {
 }
 
 function loadTasks() {
-    const saved = localStorage.getItem("Tasks");
+    const saved = localStorage.getItem("tasks");
 
     if(saved) {
         tasks = JSON.parse(saved);
@@ -129,7 +129,11 @@ function renderTasks() {
     const taskItem = document.createElement("div");
     taskItem.classList.add("task-item");
 
-    
+    if (task.completed) {
+    taskItem.classList.add("task-item-checked");
+    } else {
+    taskItem.classList.add("task-item");
+    }
 
     const taskLeft = document.createElement("div");
     taskLeft.classList.add("task-left");
@@ -215,16 +219,9 @@ function createTask() {
 }
 
 completeAllBtn.addEventListener("click", function() {
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
-
-    checkboxes.forEach(function(checkbox) {
-        checkbox.checked = true;
-        const taskItem = checkbox.closest(".task-item");
-        if (taskItem) {
-            taskItem.classList.add("completed");
-        }
+    tasks.forEach(task => {
+        task.completed = true;
     });
-
     saveTasks();
     renderTasks();
 });
