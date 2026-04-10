@@ -120,6 +120,18 @@ function renderTasks() {
 
     taskList.innerHTML = "";
 
+    if (tasks.length === 0) {
+        const mensaje = document.createElement("p");
+        mensaje.textContent = "Aun no hay tareas";
+        mensaje.style.textAlign = "center";
+        mensaje.style.color = "gray";
+
+        taskList.appendChild(mensaje);
+
+        updateStats();
+        return; 
+    }
+
     tasks.forEach( function(task, index) {
 
     const fecha = document.createElement("small"); 
