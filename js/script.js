@@ -24,6 +24,9 @@ const progressTasks = document.getElementById("progress");
 
 //Boton para completar todas las tareas
 const completeAllBtn = document.getElementById("completeAllBtn");
+const deleteAllBtn = document.getElementById("deleteAllBtn");
+const deleteCompletedBtn = document.getElementById("deleteCompletedBtn");
+const dismarkAllBtn = document.getElementById("dismarkAllBtn");
 
 //Botones sort
 const sortAZ = document.getElementById("sortAZ");
@@ -120,7 +123,7 @@ function renderTasks() {
     tasks.forEach( function(task, index) {
 
     const fecha = document.createElement("small"); 
-    fecha.textContent = ` (${new Date().toLocaleDateString()})`; 
+    fecha.textContent = ` (${task.date})`;
     fecha.style.fontSize = "12px";
     fecha.style.color = "gray";
     fecha.style.marginLeft = "8px";
@@ -195,11 +198,7 @@ function toggleTask(index) {
     renderTasks();
 }
 
-function deleteTask(index) {
-    tasks.splice(index, 1);
-    saveTasks();
-    renderTasks();
-}
+
 
 function addTask(taskText) {
     //Guardamos el texto que escribio el usuario
@@ -211,9 +210,18 @@ function addTask(taskText) {
         return;
     }
 
+    //Para verificar que la tarea no exista ya
+    const duplicado = tasks.some(task => task.text.toLowerCase().trim() === taskText.toLowerCase().trim());
+
+    if (duplicado) {
+        alert("Esta tarea ya existe en el Dashboard.");
+        return;
+    }
+
     const newTask = {
         text: taskText,
-        completed: false
+        completed: false,
+        date: new Date().toLocaleDateString()
     }
 
     tasks.push(newTask);
@@ -235,6 +243,54 @@ completeAllBtn.addEventListener("click", function() {
     renderTasks();
 });
 
+deleteAllBtn.addEventListener("click", function() {
+    const confirmar = confirm("Esta opcion eliminará TODAS las tareas. Deseas continuar?");
+
+    if (confirmar) {
+        tasks = [];
+        saveTasks();
+        renderTasks();
+    }
+});
+
+deleteCompletedBtn.addEventListener("click", function() {
+
+    const hayCompletadas = tasks.some(task => task.completed);
+
+    if (!hayCompletadas) {
+        alert("No hay tareas completadas aun");
+        return;
+    }
+
+    const confirmar = confirm("Esta opcion eliminará las tareas COMPLETADAS. Deseas continuar?");
+
+    if (confirmar) {
+        tasks = tasks.filter(task => !task.completed);
+
+        saveTasks();
+        renderTasks();
+    }
+});
+
+dismarkAllBtn.addEventListener("click", function() {
+
+    const hayCompletadas = tasks.some(task => task.completed);
+
+    if (!hayCompletadas) {
+        alert("No hay tareas completadas aun");
+        return;
+    }
+
+    tasks.forEach(task => {
+        if (task.completed) {
+            task.completed = false;
+        }
+    });
+
+    saveTasks();
+    renderTasks();
+    
+});
 
 
 
