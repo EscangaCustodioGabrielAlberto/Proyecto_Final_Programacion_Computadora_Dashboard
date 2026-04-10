@@ -96,6 +96,7 @@
     margin: 13px;
     font-size: 1.6rem;
     flex-direction: row;
+    transition: all 0.3s ease;
 }
 
 .task-item-checked {
@@ -108,6 +109,29 @@
     font-size: 1.6rem;
     text-decoration: line-through;
     flex-direction: row;
+    transition: all 0.3s ease;
+}
+
+.task-enter {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.95);
+}
+
+.task-exit {
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+}
+
+@keyframes completeAnim {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .task-item:hover .delete-btn{

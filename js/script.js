@@ -144,6 +144,7 @@ function renderTasks() {
 
     const taskItem = document.createElement("div");
     taskItem.classList.add("task-item");
+    taskItem.classList.add("task-enter");
 
     if (task.completed) {
     taskItem.classList.add("task-item-checked");
@@ -164,20 +165,22 @@ function renderTasks() {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Eliminar";
     deleteButton.classList.add("delete-btn");
-
-    deleteButton.addEventListener("click", function() {
-      tasks.splice(index, 1);
-
-      saveTasks();
-      renderTasks();
-    });
     
     deleteButton.addEventListener("click", function() {
     const confirmar = confirm("¿Estas seguro de querer eliminar esta tarea?");
 
     if (confirmar) {
-        deleteTask(index);
+        const item = taskItem; 
+
+        item.classList.add("task-exit");
+
+        setTimeout(() => {
+            tasks.splice(index, 1);
+            saveTasks();
+            renderTasks();
+        }, 300);
     }
+
     });
 
     checkbox.addEventListener("change", function() {
@@ -197,7 +200,14 @@ function renderTasks() {
 
     //Agregar la tarea al Dashboard
     taskList.appendChild(taskItem)
+
+    requestAnimationFrame(() => {
+    taskItem.classList.remove("task-enter");
     });
+
+    });
+
+    
 
     updateStats();
 
@@ -259,9 +269,17 @@ deleteAllBtn.addEventListener("click", function() {
     const confirmar = confirm("Esta opcion eliminará TODAS las tareas. Deseas continuar?");
 
     if (confirmar) {
-        tasks = [];
-        saveTasks();
-        renderTasks();
+        const items = document.querySelectorAll(".task-item, .task-item-checked");
+
+        items.forEach(item => {
+            item.classList.add("task-exit");
+        });
+
+        setTimeout(() => {
+            tasks = [];
+            saveTasks();
+            renderTasks();
+        }, 300);
     }
 });
 
@@ -277,10 +295,17 @@ deleteCompletedBtn.addEventListener("click", function() {
     const confirmar = confirm("Esta opcion eliminará las tareas COMPLETADAS. Deseas continuar?");
 
     if (confirmar) {
-        tasks = tasks.filter(task => !task.completed);
+        const items = document.querySelectorAll(".task-item-checked");
 
-        saveTasks();
-        renderTasks();
+        items.forEach(item => {
+            item.classList.add("task-exit");
+        });
+
+        setTimeout(() => {
+            tasks = tasks.filter(task => !task.completed);
+            saveTasks();
+            renderTasks();
+        }, 300);
     }
 });
 
