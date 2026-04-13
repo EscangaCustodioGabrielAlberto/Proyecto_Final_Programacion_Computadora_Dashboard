@@ -118,18 +118,37 @@ function getStats() {
 
 function renderTasks() {
 
+    taskList.style.fontFamily = '"Jersey 10", sans-serif';
+
     taskList.innerHTML = "";
 
     if (tasks.length === 0) {
+        const contenedor = document.createElement("div");
+
+        const img = document.createElement("img");
+        img.src = "img/yoshi_mimir.png";
+        img.style.width = "300px"; 
+
         const mensaje = document.createElement("p");
         mensaje.textContent = "Aun no hay tareas";
-        mensaje.style.textAlign = "center";
-        mensaje.style.color = "gray";
 
-        taskList.appendChild(mensaje);
+        contenedor.style.display = "flex";
+        contenedor.style.flexDirection = "column";
+        contenedor.style.alignItems = "center";    
+        contenedor.style.justifyContent = "center";
+
+        mensaje.style.color = "white";
+        mensaje.style.textAlign = "center";
+        mensaje.style.fontSize = "34px";
+        mensaje.style.fontFamily = '"Jersey 10", sans-serif';
+
+        contenedor.appendChild(img);
+        contenedor.appendChild(mensaje);
+
+        taskList.appendChild(contenedor);
 
         updateStats();
-        return; 
+        return;
     }
 
     tasks.forEach( function(task, index) {
