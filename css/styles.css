@@ -1,15 +1,20 @@
 :root {
-    --primary: rgb(220, 203, 253);
-    --secondary: rgb(253, 253, 181);
-    --primary-dark: rgb(182, 146, 255);
-    --secondary-dark: rgb(255, 255, 102);
+    --primary: rgb(28, 180, 53);
+    --secondary: rgb(28, 180, 53);
+    --primary-dark: rgb(7, 120, 26);
+    --secondary-dark: rgb(7, 120, 26);
 }
 
 .header {
-    text-align: center;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    font-family: "Press Start 2P", system-ui;
+    font-size: 10px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background: linear-gradient(135deg, var(--primary), var(--secondary-dark));
     height: 13vh;
     padding-top: 7px;
+    color: white;
 }
 
 .container {
@@ -31,17 +36,21 @@
     height: 46px;
     border-radius: 7px;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 30px;
+    font-family: "Jersey 10", sans-serif;
+    text-decoration: none;
 }
 
 .task-form button {
     background-color: var(--secondary);
     border:2px solid var(--secondary-dark);
-    color: black;
+    color: white;
     padding: 2px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 20px;
     text-decoration: none;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: normal;
     margin-top: 12px;
     margin-left: 5px;
     height: 33px;
@@ -104,7 +113,7 @@
     width: 670px;
     border:2px solid var(--primary-dark);
     border-radius: 8px;
-    background-color: var(--primary-dark);
+    background-color: rgb(168, 221, 177);
     margin: 13px;
     font-size: 1.6rem;
     text-decoration: line-through;
@@ -151,11 +160,13 @@
 .task-sort button {
     background-color: var(--secondary);
     border:2px solid var(--secondary-dark);
-    color: black;
+    color: white;
     padding: 2px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 20px;
     text-decoration: none;
     border-radius: 10px;
-    font-weight: bold;
+    font-weight: normal;
     margin-left: 5px;
     height: 33px;
     transition: all 0.3s ease;
@@ -172,10 +183,11 @@
     margin-left: auto;
     display: none;
     border-radius: 10px;
+    font-family: "Jersey 10", sans-serif;
 }
 
 .delete-btn:hover {
-    background-color: rgb(140, 90, 239);
+    background-color: rgb(20, 215, 62);
 }
 
 .completed span {
@@ -186,11 +198,14 @@
 .task-stats {
     display: flex;
     justify-content: space-between;
-    background: rgb(237, 216, 249);
+    background: rgb(216, 249, 220);
     padding: 12px;
     border-radius: 7px;
     margin-bottom: 20px;
     gap: 60px;
+    font-family: "Jersey 10", sans-serif;
+    font-size: 20px;
+    text-decoration: none;
 }
 
 .task-sort {
