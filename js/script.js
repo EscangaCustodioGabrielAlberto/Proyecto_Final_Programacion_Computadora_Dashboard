@@ -10,6 +10,9 @@ con los que va a trabajar dentro de la página.
 // Campo donde el usuario escribe la tarea
 const input = document.getElementById("taskInput");
 
+//Campo donde se elige el nivel de prioridad
+const prioritySelect = document.getElementById("prioritySelect");
+
 // Botón para agregar tarea
 const button = document.getElementById("addTaskBtn");
 
@@ -31,6 +34,16 @@ const dismarkAllBtn = document.getElementById("dismarkAllBtn");
 //Botones sort
 const sortAZ = document.getElementById("sortAZ");
 const sortZA = document.getElementById("sortZA");
+
+const sortPriority = document.getElementById("sortPriority");
+sortPriority.addEventListener("click", sortByPriority);
+
+//Valores de prioridad
+const prioridadValor = {
+    Alta: 3,
+    Media: 2,
+    Baja: 1
+};
 
 //Modelo de datos
 let tasks = [];
@@ -79,6 +92,15 @@ sortZA.addEventListener("click", function(){
     renderTasks();
 
 })
+
+function sortByPriority() {
+    tasks.sort((a, b) => {
+        return prioridadValor[b.priority] - prioridadValor[a.priority];
+    });
+
+    saveTasks();
+    renderTasks();
+}
 
 /*
 addEventListener permite ejecutar código
@@ -153,11 +175,19 @@ function renderTasks() {
 
     tasks.forEach( function(task, index) {
 
+    //Mostrar fecha
     const fecha = document.createElement("small"); 
     fecha.textContent = ` (${task.date})`;
     fecha.style.fontSize = "12px";
     fecha.style.color = "gray";
     fecha.style.marginLeft = "8px";
+
+    //Mostrar prioridad
+    const prioridad = document.createElement("span");
+    prioridad.textContent = ` [${task.priority}]`;
+    prioridad.style.marginLeft = "10px";
+    prioridad.style.fontWeight = "normal";
+    prioridad.style.fontSize = "18px";
 
     //Crear elemento de tarea
 
@@ -210,6 +240,7 @@ function renderTasks() {
     taskLeft.appendChild(checkbox);
     taskLeft.appendChild(span);
     taskLeft.appendChild(fecha);
+    span.appendChild(prioridad);
     taskItem.appendChild(taskLeft);
     taskItem.appendChild(deleteButton);
     
@@ -262,7 +293,8 @@ function addTask(taskText) {
     const newTask = {
         text: taskText,
         completed: false,
-        date: new Date().toLocaleDateString()
+        date: new Date().toLocaleDateString(),
+        priority: prioritySelect.value
     }
 
     tasks.push(newTask);

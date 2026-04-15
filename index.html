@@ -19,6 +19,12 @@
 
         <section class="task-form">
             <input id="taskInput" type="text" placeholder="Nueva tarea">
+            <label>Prioridad:</label>
+            <select id="prioritySelect">
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+            </select>
             <button id="addTaskBtn">Agregar</button>
             <br>
             <button id="completeAllBtn">Completar Todas Las Tareas ✅✅</button>
@@ -29,6 +35,7 @@
 
         <!-- El Contador de tareas-->
          <section class="task-stats">
+            <img src="img/yoshi_corriendo.gif" height="80">
             <p>🌐Total: <span id="totalTasks"> 0 </span></p>
             <p>✔️Completadas: <span id="completedTasks"> 0 </span> </p>
             <p>⏳Pendientes: <span id="pendingTasks"> 0 </span></p>
@@ -38,6 +45,7 @@
          <section class="task-sort">
             <button id="sortAZ">Ordenar de A -> Z</button>
             <button id="sortZA">Ordenar de Z -> A</button>
+            <button id="sortPriority">Ordenar por prioridad</button>
          </section>
 
         <section id="taskList" class="task-list">

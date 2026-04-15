@@ -31,9 +31,26 @@
     margin-top: 35px;
 }
 
+.task-form label{
+    margin-left: 10px;
+    font-size: 25px;
+    font-family: "Jersey 10", sans-serif;
+    text-decoration: none;
+}
+
+.task-form select{
+    width: 100px;
+    height: 35px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    font-family: "Jersey 10", sans-serif;
+    text-decoration: none;
+}
+
 .task-form input {
-    width: 850px;
-    height: 46px;
+    width: 800px;
+    height: 40px;
     border-radius: 7px;
     margin-bottom: 10px;
     font-size: 30px;
