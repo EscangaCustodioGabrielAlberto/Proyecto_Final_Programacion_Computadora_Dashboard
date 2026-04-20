@@ -7,7 +7,8 @@
 
 .header {
     font-family: "Press Start 2P", system-ui;
-    font-size: 10px;
+    font-size: 14px;
+    letter-spacing: 2px;
     display: flex;
     justify-content: center; 
     align-items: center; 
@@ -15,6 +16,11 @@
     height: 13vh;
     padding-top: 7px;
     color: white;
+}
+
+body {
+    background-color: rgb(221, 248, 218);
+    margin: 0;
 }
 
 .container {
@@ -56,6 +62,12 @@
     font-size: 30px;
     font-family: "Jersey 10", sans-serif;
     text-decoration: none;
+    border: 2px solid transparent;
+    outline: none;
+}
+
+.task-form input:focus {
+    border: 2px solid var(--secondary);
 }
 
 .task-form button {
@@ -90,6 +102,8 @@
     justify-content: center;
     padding-top: 12px;
     padding-bottom: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    backdrop-filter: blur(15px);
 }
 
 .complete-btn {
@@ -123,6 +137,7 @@
     font-size: 1.6rem;
     flex-direction: row;
     transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .task-item-checked {
@@ -136,6 +151,7 @@
     text-decoration: line-through;
     flex-direction: row;
     transition: all 0.3s ease;
+    animation: completeAnim 0.3s ease;
 }
 
 .task-enter {
@@ -215,7 +231,7 @@
 .task-stats {
     display: flex;
     justify-content: space-between;
-    background: rgb(216, 249, 220);
+    background: rgb(177, 245, 185);
     padding: 12px;
     border-radius: 7px;
     margin-bottom: 20px;
