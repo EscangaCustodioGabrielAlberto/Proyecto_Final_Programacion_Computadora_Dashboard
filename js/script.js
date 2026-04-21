@@ -214,6 +214,10 @@ function renderTasks() {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Eliminar";
     deleteButton.classList.add("delete-btn");
+
+    const editButton = document.createElement("button");
+    editButton.textContent = "Editar";
+    editButton.classList.add("edit-btn");
     
     deleteButton.addEventListener("click", function() {
     const confirmar = confirm("¿Estas seguro de querer eliminar esta tarea?");
@@ -242,6 +246,7 @@ function renderTasks() {
     taskLeft.appendChild(fecha);
     span.appendChild(prioridad);
     taskItem.appendChild(taskLeft);
+    taskItem.appendChild(editButton);
     taskItem.appendChild(deleteButton);
     
 
@@ -378,6 +383,22 @@ dismarkAllBtn.addEventListener("click", function() {
     saveTasks();
     renderTasks();
     
+});
+
+editButton.addEventListener("click", function() {
+    const nuevoTexto = prompt("Editar tarea:", task.text);
+
+    if (nuevoTexto === null) return; // canceló
+
+    if (nuevoTexto.trim().length < 5) {
+        alert("La tarea debe tener al menos 5 caracteres.");
+        return;
+    }
+
+    tasks[index].text = nuevoTexto.trim();
+
+    saveTasks();
+    renderTasks();
 });
 
 

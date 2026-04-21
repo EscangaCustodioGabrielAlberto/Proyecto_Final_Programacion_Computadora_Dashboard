@@ -224,6 +224,19 @@ body {
     background-color: rgb(20, 215, 62);
 }
 
+.edit-btn {
+    background-color: var(--primary);
+    color:white;
+    margin-left: auto;
+    display: none;
+    border-radius: 10px;
+    font-family: "Jersey 10", sans-serif;
+}
+
+.edit-btn:hover {
+    background-color: rgb(20, 215, 62);
+}
+
 .completed span {
     text-decoration: line-through;
     opacity: 0.6;
