@@ -218,6 +218,39 @@ function renderTasks() {
     const editButton = document.createElement("button");
     editButton.textContent = "Editar";
     editButton.classList.add("edit-btn");
+
+    //boton de editar
+    editButton.addEventListener("click", function() {
+
+    const inputEdit = document.createElement("input");
+    inputEdit.type = "text";
+    inputEdit.value = task.text;
+
+    taskLeft.replaceChild(inputEdit, span);
+
+    inputEdit.focus();
+
+    inputEdit.addEventListener("keypress", function(e) {
+        if (e.key === "Enter") {
+            guardarCambio();
+        }
+    });
+
+    inputEdit.addEventListener("blur", guardarCambio);
+
+    function guardarCambio() {
+        const nuevoTexto = inputEdit.value.trim();
+
+        if (nuevoTexto.length < 5) {
+            alert("Muy corto");
+            return;
+        }
+
+        tasks[index].text = nuevoTexto;
+        saveTasks();
+        renderTasks();
+    }
+    });
     
     deleteButton.addEventListener("click", function() {
     const confirmar = confirm("¿Estas seguro de querer eliminar esta tarea?");
@@ -244,7 +277,7 @@ function renderTasks() {
     taskLeft.appendChild(checkbox);
     taskLeft.appendChild(span);
     taskLeft.appendChild(fecha);
-    span.appendChild(prioridad);
+    taskLeft.appendChild(prioridad);
     taskItem.appendChild(taskLeft);
     taskItem.appendChild(editButton);
     taskItem.appendChild(deleteButton);
@@ -383,22 +416,6 @@ dismarkAllBtn.addEventListener("click", function() {
     saveTasks();
     renderTasks();
     
-});
-
-editButton.addEventListener("click", function() {
-    const nuevoTexto = prompt("Editar tarea:", task.text);
-
-    if (nuevoTexto === null) return; // canceló
-
-    if (nuevoTexto.trim().length < 5) {
-        alert("La tarea debe tener al menos 5 caracteres.");
-        return;
-    }
-
-    tasks[index].text = nuevoTexto.trim();
-
-    saveTasks();
-    renderTasks();
 });
 
 

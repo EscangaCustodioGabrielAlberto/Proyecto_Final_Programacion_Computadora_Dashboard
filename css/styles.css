@@ -178,11 +178,11 @@ body {
 }
 
 .task-item:hover .delete-btn{
-    display:block;
+    display:inline-block;
 }
 
 .task-item-checked:hover .delete-btn {
-    display:block;
+    display:inline-block;
 }
 
 .task-left {
@@ -215,9 +215,11 @@ body {
     background-color: var(--primary-dark);
     color:white;
     margin-left: auto;
-    display: none;
+    display: inline-block;
     border-radius: 10px;
     font-family: "Jersey 10", sans-serif;
+    opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
 .delete-btn:hover {
@@ -227,14 +229,24 @@ body {
 .edit-btn {
     background-color: var(--primary);
     color:white;
-    margin-left: auto;
-    display: none;
+    margin-left: 10px;
+    display: inline-block;
     border-radius: 10px;
     font-family: "Jersey 10", sans-serif;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
 .edit-btn:hover {
     background-color: rgb(20, 215, 62);
+}
+
+.task-item:hover .edit-btn,
+.task-item:hover .delete-btn,
+.task-item-checked:hover .edit-btn,
+.task-item-checked:hover .delete-btn {
+    opacity: 1;
+    display: inline-block;
 }
 
 .completed span {
